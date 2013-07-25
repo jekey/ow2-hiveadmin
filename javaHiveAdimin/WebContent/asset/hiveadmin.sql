@@ -1,20 +1,20 @@
-create table if not exists testuser
-	(id int auto_increment primary key,
-	name varchar(20));
+create database if not exists hiveadmin;
 
-create table if not exists user
-	(userid int auto_increment primary key,
-	username varchar(30) not null);
+create table if not exists hiveadmin.user
+	(username varchar(30) primary key,
+	userpass varchar(30));
 
-create table if not exists  op_record
+create table if not exists  hiveadmin.op_record
 	(op_record_id int auto_increment primary key,
+	op_user_name varchar(30) not null,
 	op_desc text not null,
 	op_sql text not null,
 	op_res boolean,
 	op_ts timestamp);
 
-create table if not exists user_history
-	(userid int not null,
-	op_record_id int not null,
-	constraint cst1 primary key(userid,op_record_id)
-	);
+create table if not exists hiveadmin.template
+	(temp_name varchar(60) primary key,
+	owner_name varchar(30),
+	temp_description text,
+	temp_content text not null,
+	temp_ts timestamp default current_timestamp);
